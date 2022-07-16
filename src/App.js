@@ -17,6 +17,8 @@ function App() {
         return result;
     };
 
+    console.log("videos", videos);
+
     useEffect(() => {
         if (selectedFiles?.length > 0) {
             const convertedVideos = [];
@@ -33,38 +35,6 @@ function App() {
     return (
         <div className="App">
             <SearchBar files={getSelectedFilesNames()} play={setVideoToPlay} />
-            <div className="player-container">
-                <div className="list-container">
-                    {selectedFiles?.map((item, index) => {
-                        return (
-                            <div
-                                key={index}
-                                className="list-item"
-                                onClick={() => {
-                                    setVideoToPlay(index);
-                                }}
-                                style={{
-                                    backgroundColor:
-                                        videoToPlay === index
-                                            ? "greenyellow"
-                                            : null,
-                                    color:
-                                        videoToPlay === index ? "black" : null,
-                                }}
-                            >
-                                {item.name}
-                            </div>
-                        );
-                    })}
-                </div>
-                <ReactPlayer
-                    controls
-                    playing={playing}
-                    url={videos[videoToPlay]}
-                    onEnded={() => setVideoToPlay(videoToPlay + 1)}
-                    style={{ backgroundColor: playing ? null : "black" }}
-                />
-            </div>
             <input
                 className="input-file"
                 type="file"
@@ -92,6 +62,39 @@ function App() {
                 >
                     Next
                 </button>
+            </div>
+            <ReactPlayer
+                className={"react-player"}
+                controls
+                playing={playing}
+                url={videos[videoToPlay]}
+                onEnded={() => setVideoToPlay(videoToPlay + 1)}
+                style={{ backgroundColor: playing ? null : "black" }}
+            />
+            <div className="player-container">
+                <div className="list-container">
+                    {selectedFiles?.map((item, index) => {
+                        return (
+                            <div
+                                key={index}
+                                className="list-item"
+                                onClick={() => {
+                                    setVideoToPlay(index);
+                                }}
+                                style={{
+                                    backgroundColor:
+                                        videoToPlay === index
+                                            ? "greenyellow"
+                                            : null,
+                                    color:
+                                        videoToPlay === index ? "black" : null,
+                                }}
+                            >
+                                {item.name}
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
         </div>
     );

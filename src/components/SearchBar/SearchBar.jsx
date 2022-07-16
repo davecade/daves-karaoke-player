@@ -1,31 +1,33 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
 import './SearchBar.scss'
 
 const SearchBar = ({ files, play }) => {
     const [ userSearch, setUserSearch ] = useState("")
+    const [ notFound, setNotFound ] = useState(false)
+
+    const playVideo = useCallback(() => {
+        const index = files.findIndex( file => file.includes(userSearch))
+
+        if(index >= 0){
+            setNotFound(false)
+            play(index)
+        } else {
+            setNotFound(true)
+        }
+    }, [play, files, userSearch])
+
+    const downHandler = useCallback((e) => {
+        if(e.key === 'Enter'){
+            playVideo()
+        }
+    }, [playVideo]);
 
     useEffect(() => {
         window.addEventListener("keydown", downHandler);
         return () => {
           window.removeEventListener("keydown", downHandler);
         };
-      }, [userSearch]);
-
-    const downHandler = (e) => {
-        if(e.key === 'Enter'){
-            playVideo()
-        }
-    }
-
-    const playVideo = () => {
-        const index = files.findIndex( file => file.includes(userSearch))
-
-        if(index >= 0){
-            play(index)
-        } else {
-            console.log("not found")
-        }
-    }
+      }, [userSearch, downHandler]);
 
 
   return (
@@ -33,6 +35,7 @@ const SearchBar = ({ files, play }) => {
         <input className='searchbar' type={"search"} onChange={(e) =>{
             setUserSearch(e.target.value.toLowerCase())
         }}/>
+        <div>{notFound ? "Not Found" : ""}</div>
         <button onClick={playVideo}>Submit</button>
     </div>
   )
