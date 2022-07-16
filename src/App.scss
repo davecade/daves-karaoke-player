@@ -1,0 +1,44 @@
+.App {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .player-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .list-container {
+      height: 20rem;
+      overflow: scroll;
+      overflow-x: hidden;
+    }
+
+    .list-item {
+      user-select: none;
+      border: 1px solid black;
+      margin: .5rem 0;
+      transition: all .3s;
+      
+
+      &:hover {
+        cursor: pointer;
+        background-color: #94d5f3;
+        color: black;
+        
+      }
+
+      &:active {
+        transform: scale(1.1);
+      }
+    }
+
+    .input-file {
+      margin: 2rem 0;
+    }
+  }
+}
+
