@@ -6,7 +6,6 @@ import SearchBar from "./components/SearchBar/SearchBar";
 function App() {
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [playing, setPlaying] = useState(false);
-    const [videos, setVideos] = useState([]);
     const [videoToPlay, setVideoToPlay] = useState(0);
     const [queue, setQueue] = useState([]);
 
@@ -19,17 +18,20 @@ function App() {
     };
 
     useEffect(() => {
-        if (selectedFiles?.length > 0) {
-            const convertedVideos = [];
-            for (let i = 0; i < selectedFiles.length; i++) {
-                convertedVideos.push(URL.createObjectURL(selectedFiles[i]));
-            }
-            setVideos(convertedVideos);
+        if (queue?.length === 1) {
+            setVideoToPlay(0);
+        } else if (videoToPlay >= queue?.length) {
+            setVideoToPlay(queue?.length - 1);
+        }
+    }, [queue, videoToPlay]);
+
+    useEffect(() => {
+        if (queue?.length > 0) {
             setPlaying(true);
         } else {
             setPlaying(false);
         }
-    }, [selectedFiles]);
+    }, [queue]);
 
     console.log("queue", queue);
 
@@ -37,8 +39,6 @@ function App() {
         if (queue?.length > 0) {
             // check if the item exists in the queue
             const index = queue.findIndex((itemInQ) => {
-                console.log("itemInQ.name === item.name", itemInQ.name);
-                console.log("item.name", item.name);
                 return itemInQ.name === item.name;
             });
 
