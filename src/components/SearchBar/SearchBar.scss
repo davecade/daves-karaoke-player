@@ -4,4 +4,13 @@
     align-items: center;
     flex-direction: column;
     margin-bottom: 1rem;
+
+    .searchbar{
+        height: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    button {
+        padding: .2rem .5rem;
+    }
 }

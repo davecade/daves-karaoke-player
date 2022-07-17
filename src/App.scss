@@ -1,8 +1,9 @@
 .App {
+  padding: 2rem 0;
   text-align: center;
   height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
 
@@ -14,39 +15,115 @@
     margin-bottom: 2rem;
   }
 
-  .react-player {
-    margin-bottom: 1rem;
-  }
+  .player-queue {
 
-  .list-container {
-    height: 20rem;
-    overflow: scroll;
-    overflow-x: hidden;
-    -ms-overflow-style: none;
-    scrollbar-width: none; /* Firefox */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    &::-webkit-scrollbar {
-      display: none;
+    .react-player {
+      margin-bottom: 1rem;
     }
-    
-  }
 
-  .list-item {
-    user-select: none;
-    border: 1px solid black;
-    margin: .5rem 0;
-    transition: all .3s;
-    
+    .list-container {
+      height: 25rem;
+      overflow: scroll;
+      overflow-x: hidden;
+      -ms-overflow-style: none;
+      scrollbar-width: none; /* Firefox */
 
-    &:hover {
-      cursor: pointer;
-      background-color: #94d5f3;
-      color: black;
+  
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .list-item {
+        user-select: none;
+        border: 1px solid black;
+        margin: .5rem 0;
+        transition: all .3s;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: start;
+        padding: 0 1rem;
+        cursor: pointer;
+    
+        &:hover {
+          //background-color: #94d5f3;
+          //color: black;
+        }
+    
+        .queue-button{
+          background-color: greenyellow;
+          color: black;
+          padding: 1rem;
+
+          &:active {
+            transform: scale(1.1);
+          }
+        }
+      }
       
     }
+    
+  }
 
-    &:active {
-      transform: scale(1.1);
+
+  .player-container{
+    position: relative;
+
+    .list-container {
+      height: 25rem;
+      overflow: scroll;
+      overflow-x: hidden;
+      -ms-overflow-style: none;
+      scrollbar-width: none; /* Firefox */
+
+  
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .list-item {
+        user-select: none;
+        border: 1px solid black;
+        margin: .5rem 0;
+        transition: all .3s;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: start;
+        width: 40rem;
+        padding: 0 1rem;
+        cursor: pointer;
+    
+        &:hover {
+          //background-color: #94d5f3;
+          //color: black;
+        }
+    
+        .queue-button{
+          background-color: greenyellow;
+          color: black;
+          padding: 1rem;
+
+          &:active {
+            transform: scale(1.1);
+          }
+        }
+      }
+      
+    }
+  
+    .blur{
+      position: absolute;
+      width: 100%;
+      height: 4rem;
+      bottom: -10px;
+      background-color: #3b3985;
+      opacity: 0.9;
+      filter: blur(0.5rem);
     }
   }
 }

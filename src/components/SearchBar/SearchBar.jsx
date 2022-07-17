@@ -1,20 +1,20 @@
 import React, {useState, useEffect, useCallback} from 'react'
 import './SearchBar.scss'
 
-const SearchBar = ({ files, play }) => {
+const SearchBar = ({ fileNames, handleQueue, selectedFiles }) => {
     const [ userSearch, setUserSearch ] = useState("")
     const [ notFound, setNotFound ] = useState(false)
 
     const playVideo = useCallback(() => {
-        const index = files.findIndex( file => file.includes(userSearch))
+        const index = fileNames.findIndex( file => file.includes(userSearch))
 
         if(index >= 0){
             setNotFound(false)
-            play(index)
+            handleQueue(selectedFiles[index])
         } else {
             setNotFound(true)
         }
-    }, [play, files, userSearch])
+    }, [handleQueue, fileNames, userSearch])
 
     const downHandler = useCallback((e) => {
         if(e.key === 'Enter'){
