@@ -33,8 +33,6 @@ function App() {
         }
     }, [queue]);
 
-    console.log("queue", queue);
-
     const handleQueue = (item) => {
         if (queue?.length > 0) {
             // check if the item exists in the queue
@@ -73,14 +71,19 @@ function App() {
                 selectedFiles={selectedFiles}
                 handleQueue={handleQueue}
             />
-            <input
-                className="input-file"
-                type="file"
-                multiple
-                onChange={(e) => {
-                    setSelectedFiles([...e.target.files]);
-                }}
-            />
+            <div className="input-container">
+                <input
+                    className="input-file"
+                    type="file"
+                    multiple
+                    onChange={(e) => {
+                        if (e?.target?.files?.length > 0) {
+                            setQueue([]);
+                            setSelectedFiles([...e.target.files]);
+                        }
+                    }}
+                />
+            </div>
             <div className="buttons-container">
                 <button
                     onClick={() => {
@@ -161,7 +164,7 @@ function App() {
                         );
                     })}
                 </div>
-                <div className="blur"></div>
+                {/* <div className="blur"></div> */}
             </div>
         </div>
     );
