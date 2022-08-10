@@ -2,6 +2,7 @@ import "./App.scss";
 import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import SearchBar from "./components/SearchBar/SearchBar";
+import SearchBarMiu from "./components/SearchBarMui/SearchBarMiu";
 
 function App() {
     const [selectedFiles, setSelectedFiles] = useState([]);
@@ -66,11 +67,16 @@ function App() {
 
     return (
         <div className="App">
-            <SearchBar
+            <SearchBarMiu
                 fileNames={getSelectedFilesNames()}
                 selectedFiles={selectedFiles}
                 handleQueue={handleQueue}
             />
+            {/* <SearchBar
+                fileNames={getSelectedFilesNames()}
+                selectedFiles={selectedFiles}
+                handleQueue={handleQueue}
+            /> */}
             <div className="input-container">
                 <input
                     className="input-file"

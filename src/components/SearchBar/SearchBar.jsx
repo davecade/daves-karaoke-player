@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react'
+
 import './SearchBar.scss'
 
 const SearchBar = ({ fileNames, handleQueue, selectedFiles }) => {
