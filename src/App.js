@@ -75,7 +75,7 @@ function App() {
             />
             <div className="input-container">
                 <Button variant="contained" component="label">
-                    Upload File
+                    Select Videos
                     <input
                         hidden
                         className="input-file"
