@@ -1,12 +1,13 @@
-import React, {useState, useEffect, useCallback} from 'react'
-import Box from '@material-ui/core/Box';
+import React, {useState, useEffect, useCallback} from 'react';
 import TextField from '@material-ui/core/TextField';
-
+import Stack from '@mui/material/Stack';
+import { withStyles } from '@material-ui/core/styles';
 
 const SearchBarMiu = ({ fileNames, handleQueue, selectedFiles }) => {
 
   const [ userSearch, setUserSearch ] = useState("")
   const [ notFound, setNotFound ] = useState(false)
+  const [value, setValue] = useState(null);
 
   const playVideo = useCallback(() => {
       const index = fileNames.findIndex( file => file.includes(userSearch))
@@ -33,22 +34,43 @@ const SearchBarMiu = ({ fileNames, handleQueue, selectedFiles }) => {
     }, [userSearch, downHandler]);
 
   return (
-    <>
-      <Box
-        sx={{
-          '& > :not(style)': { m: 1, width: '25ch' },
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <TextField id="outlined-basic" label="Search" variant='outlined' style={{outlineColor: "green"}} onChange={(e) =>{
-              setUserSearch(e.target.value.toLowerCase())
-          }} />
-      </Box>
-      <div>{notFound ? "Not Found" : ""}</div>
-       <button onClick={playVideo}>Submit</button>
-    </>
+    <Stack spacing={2} sx={{ width: 300 }} id={"searchbar"}>
+        <CssTextField
+          label="Search"
+          id='searchBar'
+          variant={"outlined"}
+          InputLabelProps={{
+            style: { color: "white"}
+          }}
+          InputProps={{
+            style: { color: "white"},
+            type: 'search',
+          }}
+        />
+    </Stack>
   );
 }
+
+const CssTextField = withStyles({
+  root: {
+    '& label.Mui-focused': {
+      color: 'white',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: 'yellow',
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#1976d2',
+      },
+      '&:hover fieldset': {
+        borderColor: '#1976d2',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#1976d2',
+      },
+    },
+  },
+})(TextField);
 
 export default SearchBarMiu

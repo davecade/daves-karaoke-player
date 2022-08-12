@@ -8,9 +8,7 @@
   flex-direction: column;
 
   .input-container {
-      .input-file {
-        margin-bottom: 2rem;
-      }
+      margin: 2rem;
   }
 
   .buttons-container {
@@ -51,6 +49,7 @@
         padding: 0 1rem;
         cursor: pointer;
         background-color: #3735bb;
+        border-radius: 5px;
 
         &:hover {
           background-color: #94d5f3;
@@ -99,6 +98,7 @@
         width: 40rem;
         padding: 0 0 0 1rem;
         background-color: #2725a1;
+        border-radius: 5px;
     
         .queue-button{
           background-color: greenyellow;
@@ -106,6 +106,8 @@
           padding: 1rem;
           transition: all .3s;
           cursor: pointer;
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
 
           &:hover {
             background-color: #94d5f3;

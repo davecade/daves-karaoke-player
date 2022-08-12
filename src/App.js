@@ -1,8 +1,9 @@
 import "./App.scss";
 import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
-import SearchBar from "./components/SearchBar/SearchBar";
 import SearchBarMiu from "./components/SearchBarMui/SearchBarMiu";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
 function App() {
     const [selectedFiles, setSelectedFiles] = useState([]);
@@ -72,43 +73,46 @@ function App() {
                 selectedFiles={selectedFiles}
                 handleQueue={handleQueue}
             />
-            {/* <SearchBar
-                fileNames={getSelectedFilesNames()}
-                selectedFiles={selectedFiles}
-                handleQueue={handleQueue}
-            /> */}
             <div className="input-container">
-                <input
-                    className="input-file"
-                    type="file"
-                    multiple
-                    onChange={(e) => {
-                        if (e?.target?.files?.length > 0) {
-                            setQueue([]);
-                            setSelectedFiles([...e.target.files]);
-                        }
-                    }}
-                />
+                <Button variant="contained" component="label">
+                    Upload File
+                    <input
+                        hidden
+                        className="input-file"
+                        type="file"
+                        multiple
+                        onChange={(e) => {
+                            if (e?.target?.files?.length > 0) {
+                                setQueue([]);
+                                setSelectedFiles([...e.target.files]);
+                            }
+                        }}
+                    />
+                </Button>
             </div>
             <div className="buttons-container">
-                <button
-                    onClick={() => {
-                        if (videoToPlay > 0) {
-                            setVideoToPlay(videoToPlay - 1);
-                        }
-                    }}
-                >
-                    Prev
-                </button>
-                <button
-                    onClick={() => {
-                        if (videoToPlay < selectedFiles?.length - 1) {
-                            setVideoToPlay(videoToPlay + 1);
-                        }
-                    }}
-                >
-                    Next
-                </button>
+                <Stack spacing={2} direction="row">
+                    <Button
+                        variant="contained"
+                        onClick={() => {
+                            if (videoToPlay > 0) {
+                                setVideoToPlay(videoToPlay - 1);
+                            }
+                        }}
+                    >
+                        Prev
+                    </Button>
+                    <Button
+                        variant="contained"
+                        onClick={() => {
+                            if (videoToPlay < selectedFiles?.length - 1) {
+                                setVideoToPlay(videoToPlay + 1);
+                            }
+                        }}
+                    >
+                        Next
+                    </Button>
+                </Stack>
             </div>
             <div className="player-queue">
                 <ReactPlayer
@@ -170,7 +174,6 @@ function App() {
                         );
                     })}
                 </div>
-                {/* <div className="blur"></div> */}
             </div>
         </div>
     );
