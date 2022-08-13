@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import TextField from '@material-ui/core/TextField';
-import Stack from '@mui/material/Stack';
 import { withStyles } from '@material-ui/core/styles';
 import Button from "@mui/material/Button";
 import "./Search.scss"
