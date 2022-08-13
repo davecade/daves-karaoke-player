@@ -23,7 +23,7 @@ const Search = ({ fileNames, handleQueue, selectedFiles }) => {
 
   const downHandler = useCallback((e) => {
       if(e.key === 'Enter'){
-          playVideo()
+        submit()
       }
   }, [playVideo]);
 
@@ -34,12 +34,18 @@ const Search = ({ fileNames, handleQueue, selectedFiles }) => {
       };
     }, [userSearch, downHandler]);
 
+    const submit = () => {
+      playVideo()
+      setUserSearch("")
+    }
+
   return (
       <div className="search-container">
           <CssTextField
             label="Search"
             id='searchBar'
             variant={"outlined"}
+            value={userSearch}
             InputLabelProps={{
               style: { color: "white"}
             }}
@@ -51,7 +57,7 @@ const Search = ({ fileNames, handleQueue, selectedFiles }) => {
               setUserSearch(e.target.value.toLowerCase())
             }}
           />
-          <Button className='button' variant="contained" component="label" onClick={playVideo}>Submit</Button>
+          <Button className='button' variant="contained" component="label" onClick={submit}>Submit</Button>
       </div>
   );
 }
