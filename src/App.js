@@ -1,9 +1,7 @@
 import "./App.scss";
 import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
-import SearchBarMiu from "./components/SearchBarMui/SearchBarMiu";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
     const [selectedFiles, setSelectedFiles] = useState([]);
@@ -68,88 +66,56 @@ function App() {
 
     return (
         <div className="App">
-            <SearchBarMiu
-                fileNames={getSelectedFilesNames()}
+            <NavBar
+                getSelectedFilesNames={getSelectedFilesNames}
                 selectedFiles={selectedFiles}
+                setSelectedFiles={setSelectedFiles}
+                setQueue={setQueue}
                 handleQueue={handleQueue}
+                videoToPlay={videoToPlay}
+                setVideoToPlay={setVideoToPlay}
             />
-            <div className="input-container">
-                <Button variant="contained" component="label">
-                    Select Videos
-                    <input
-                        hidden
-                        className="input-file"
-                        type="file"
-                        multiple
-                        onChange={(e) => {
-                            if (e?.target?.files?.length > 0) {
-                                setQueue([]);
-                                setSelectedFiles([...e.target.files]);
-                            }
-                        }}
-                    />
-                </Button>
-            </div>
-            <div className="buttons-container">
-                <Stack spacing={2} direction="row">
-                    <Button
-                        variant="contained"
-                        onClick={() => {
-                            if (videoToPlay > 0) {
-                                setVideoToPlay(videoToPlay - 1);
-                            }
-                        }}
-                    >
-                        Prev
-                    </Button>
-                    <Button
-                        variant="contained"
-                        onClick={() => {
-                            if (videoToPlay < selectedFiles?.length - 1) {
-                                setVideoToPlay(videoToPlay + 1);
-                            }
-                        }}
-                    >
-                        Next
-                    </Button>
-                </Stack>
-            </div>
-            <div className="player-queue">
-                <ReactPlayer
-                    className={"react-player"}
-                    controls
-                    playing={playing}
-                    url={queue[videoToPlay]?.src}
-                    onEnded={() => setVideoToPlay(videoToPlay + 1)}
-                    style={{ backgroundColor: playing ? null : "black" }}
-                />
-                <div className="list-container">
-                    {queue.map((itemInQ, index) => (
-                        <div
-                            key={index}
-                            className="list-item"
+            <div className="content-container">
+                <div className="player-queue">
+                    <div className="react-player-container">
+                        <ReactPlayer
+                            className={"react-player"}
+                            controls
+                            playing={playing}
+                            url={queue[videoToPlay]?.src}
+                            onEnded={() => setVideoToPlay(videoToPlay + 1)}
                             style={{
-                                backgroundColor:
-                                    videoToPlay === index
-                                        ? "greenyellow"
-                                        : null,
-                                color: videoToPlay === index ? "black" : null,
+                                backgroundColor: playing ? null : "black",
                             }}
-                            onClick={() => setVideoToPlay(index)}
-                        >
-                            {itemInQ.name}
-                        </div>
-                    ))}
+                        />
+                    </div>
+                    <div className="list-container">
+                        {queue.map((itemInQ, index) => (
+                            <div
+                                key={index}
+                                className="list-item"
+                                style={{
+                                    backgroundColor:
+                                        videoToPlay === index
+                                            ? "#454561"
+                                            : null,
+                                    color:
+                                        videoToPlay === index ? "white" : null,
+                                }}
+                                onClick={() => setVideoToPlay(index)}
+                            >
+                                {itemInQ.name}
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            </div>
-            <div className="player-container">
-                <div className="list-container">
-                    {selectedFiles?.map((item, index) => {
-                        return (
-                            <div key={index} className="list-item">
-                                <p>{item.name}</p>
+                <div className="player-container">
+                    <div className="list-container">
+                        {selectedFiles?.map((item, index) => {
+                            return (
                                 <div
-                                    className="queue-button"
+                                    key={index}
+                                    className="list-item"
                                     onClick={() => {
                                         handleQueue(item);
                                     }}
@@ -168,11 +134,30 @@ function App() {
                                         })(),
                                     }}
                                 >
-                                    Queue
+                                    <p
+                                        style={{
+                                            color: (() => {
+                                                const index = queue.findIndex(
+                                                    (itemInQ) => {
+                                                        return (
+                                                            itemInQ.name ===
+                                                            item.name
+                                                        );
+                                                    }
+                                                );
+
+                                                return index >= 0
+                                                    ? "black"
+                                                    : "";
+                                            })(),
+                                        }}
+                                    >
+                                        {item.name}
+                                    </p>
                                 </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         </div>

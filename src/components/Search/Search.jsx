@@ -2,12 +2,13 @@ import React, {useState, useEffect, useCallback} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Stack from '@mui/material/Stack';
 import { withStyles } from '@material-ui/core/styles';
+import Button from "@mui/material/Button";
+import "./Search.scss"
 
-const SearchBarMiu = ({ fileNames, handleQueue, selectedFiles }) => {
+const Search = ({ fileNames, handleQueue, selectedFiles }) => {
 
   const [ userSearch, setUserSearch ] = useState("")
   const [ notFound, setNotFound ] = useState(false)
-  const [value, setValue] = useState(null);
 
   const playVideo = useCallback(() => {
       const index = fileNames.findIndex( file => file.includes(userSearch))
@@ -34,20 +35,24 @@ const SearchBarMiu = ({ fileNames, handleQueue, selectedFiles }) => {
     }, [userSearch, downHandler]);
 
   return (
-    <Stack spacing={2} sx={{ width: 300 }} id={"searchbar"}>
-        <CssTextField
-          label="Search"
-          id='searchBar'
-          variant={"outlined"}
-          InputLabelProps={{
-            style: { color: "white"}
-          }}
-          InputProps={{
-            style: { color: "white"},
-            type: 'search',
-          }}
-        />
-    </Stack>
+      <div className="search-container">
+          <CssTextField
+            label="Search"
+            id='searchBar'
+            variant={"outlined"}
+            InputLabelProps={{
+              style: { color: "white"}
+            }}
+            InputProps={{
+              style: { color: "white"},
+              type: 'search',
+            }}
+            onChange={(e) =>{
+              setUserSearch(e.target.value.toLowerCase())
+            }}
+          />
+          <Button className='button' variant="contained" component="label" onClick={playVideo}>Submit</Button>
+      </div>
   );
 }
 
@@ -73,4 +78,4 @@ const CssTextField = withStyles({
   },
 })(TextField);
 
-export default SearchBarMiu
+export default Search

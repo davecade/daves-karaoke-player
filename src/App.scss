@@ -1,135 +1,159 @@
-.App {
-  padding: 2rem 0;
-  text-align: center;
-  height: 100vh;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
+.App{
 
-  .input-container {
-      margin: 2rem;
-  }
-
-  .buttons-container {
-    margin-bottom: 2rem;
-  }
-
-  .player-queue {
+  .content-container {
+    padding: 2rem;
+    text-align: center;
+    height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-
-    .react-player {
-      margin-bottom: 1rem;
-    }
-
-    .list-container {
-      height: 25rem;
-      overflow: scroll;
-      overflow-x: hidden;
-      -ms-overflow-style: none;
-      scrollbar-width: none; /* Firefox */
-      max-height: 20rem;
-      margin-left: 1rem;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    max-width: 1500px;
+    margin: 0 auto;
   
-      &::-webkit-scrollbar {
-        display: none;
-      }
-
-      .list-item {
-        user-select: none;
-        border: 1px solid black;
-        margin: .5rem 0;
-        transition: all .3s;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        text-align: start;
-        padding: 0 1rem;
-        cursor: pointer;
-        background-color: #3735bb;
-        border-radius: 5px;
-
-        &:hover {
-          background-color: #94d5f3;
-          color: black;
-        }
-    
-        .queue-button{
-          background-color: greenyellow;
-          color: black;
-          padding: 1rem;
-
-          &:active {
-            transform: scale(1.1);
-          }
-        }
-      }
-      
-    }
-    
-  }
-
-
-  .player-container{
-    position: relative;
-
-    .list-container {
-      max-height: 25rem;
-      overflow: scroll;
-      overflow-x: hidden;
-      -ms-overflow-style: none;
-      scrollbar-width: none; /* Firefox */
-
-  
-      &::-webkit-scrollbar {
-        display: none;
-      }
-
-      .list-item {
-        user-select: none;
-        border: 1px solid black;
-        margin: .5rem 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        text-align: start;
-        width: 40rem;
-        padding: 0 0 0 1rem;
-        background-color: #2725a1;
-        border-radius: 5px;
-    
-        .queue-button{
-          background-color: greenyellow;
-          color: black;
-          padding: 1rem;
-          transition: all .3s;
-          cursor: pointer;
-          border-top-right-radius: 5px;
-          border-bottom-right-radius: 5px;
-
-          &:hover {
-            background-color: #94d5f3;
-          }
-
-          &:active {
-            transform: scale(1.1);
-          }
-        }
-      }
-      
-    }
-  
-    .blur{
-      position: absolute;
+    .player-queue {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
       width: 100%;
-      height: 4rem;
-      bottom: -10px;
-      background-color: #3b3985;
-      opacity: 0.9;
-      filter: blur(0.5rem);
+      margin-bottom: 2rem;
+  
+      .react-player-container {
+          width: fit-content;
+          flex: 1;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+  
+          .react-player {
+            height: 100%;
+            border-radius: 20px;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+          }
+      }
+  
+      .list-container {
+        height: 100%;
+        max-height: 22.5rem;
+        width: 100%;
+        flex: 1;
+        overflow: scroll;
+        overflow-x: hidden;
+        -ms-overflow-style: none;
+        scrollbar-width: none; /* Firefox */
+        margin-left: 1rem;
+        border-radius: 20px;
+        background-color: #26263A;
+    
+        &::-webkit-scrollbar {
+          display: none;
+        }
+  
+        .list-item {
+          user-select: none;
+          margin: .5rem 0;
+          transition: all .3s;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          text-align: start;
+          padding: 1rem;
+          cursor: pointer;
+          border-radius: 5px;
+  
+          &:hover {
+            background-color: #454561;
+            color: white;
+          }
+      
+          .queue-button{
+            background-color: #a9e64e;
+            color: black;
+            padding: 1rem;
+  
+            &:active {
+              transform: scale(1.1);
+            }
+          }
+        }
+        
+      }
+      
+    }
+  
+  
+    .player-container{
+      position: relative;
+  
+      .list-container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        max-height: 25rem;
+        overflow: scroll;
+        overflow-x: hidden;
+        -ms-overflow-style: none;
+        scrollbar-width: none; /* Firefox */
+        max-width: 80rem;
+        text-align: center;
+        
+  
+    
+        &::-webkit-scrollbar {
+          display: none;
+        }
+  
+        .list-item {
+          user-select: none;
+          border: 1px solid black;
+          margin: .5rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 10rem;
+          height: 7rem;
+          padding: .5rem;
+          background-color: #5e53cf;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: transform 0.3s;
+  
+          &:hover {
+            background-color: #A9A2ED;
+            color: black;
+            transform: scale(1.05);
+          }
+  
+          &:active {
+            transform: scale(1);
+          }
+          
+  
+          p {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            word-wrap: break-word;
+          }
+        }
+        
+      }
+    
+      .blur{
+        position: absolute;
+        width: 100%;
+        height: 4rem;
+        bottom: -10px;
+        background-color: #3b3985;
+        opacity: 0.9;
+        filter: blur(0.5rem);
+      }
     }
   }
 }
+
 
